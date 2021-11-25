@@ -44,6 +44,7 @@ const Auth = () => {
     } else {
       setFormData(
         {
+          ...formState.inputs,
           name: {
             value: "",
             isValid: false,
