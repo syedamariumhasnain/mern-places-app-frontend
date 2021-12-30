@@ -19,15 +19,6 @@ const ImageUpload = (props) => {
     // into readable / output able file
     const fileReader = new FileReader();
 
-    // FileReader.readAsDataURL() -- create URL, doesn't work with callback, 
-    // doesn't return promise so before readAsDataURL() 
-    
-    // we have to register FileReader.onload() execute the anonymous func.
-    // whenever file reader loads a new file or done parsing of file, will 
-    // execute once the reading of the file is done and then in here we call 
-    // our "state setter" setPreviewURL(), we don't get the passed file as
-    // an arg. Instead we have to extract it from FileReader.result.
-
     fileReader.onload = () => {
       setPreviewUrl(fileReader.result);
     }
