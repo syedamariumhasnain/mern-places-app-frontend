@@ -59,9 +59,9 @@ const Auth = () => {
       try {
         // FormData -- format which is built into browser & into javaScript
         // a browser API, no third party package required
-        
+
         // We are using this instead of JSON so that we can also take image
-        // & store it. JSON, at the end is text document & images can't be 
+        // & store it. JSON, at the end is text document & images can't be
         // stored in text format. Images are stored in binary format.
 
         const formData = new FormData();
@@ -75,7 +75,7 @@ const Auth = () => {
           "POST",
           formData
           // fetch API automatically adds the right headers to formData
-          // sendRequest --> fetch API 
+          // sendRequest --> fetch API
         );
         auth.login(responseData.user.id);
       } catch (err) {}
@@ -103,7 +103,7 @@ const Auth = () => {
           image: {
             value: null,
             isValid: false,
-          }
+          },
         },
         false
       );
@@ -130,7 +130,14 @@ const Auth = () => {
               onInput={inputHandler}
             />
           )}
-          {!isLoginMode && <ImageUpload center id="image" onInput={inputHandler} />}
+          {!isLoginMode && (
+            <ImageUpload
+              center
+              id="image"
+              onInput={inputHandler}
+              errorText="Please provide an image."
+            />
+          )}
           <Input
             id="email"
             element="input"
