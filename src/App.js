@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -21,12 +21,29 @@ const App = () => {
   const login = useCallback((uid, token) => {
     setToken(token);
     setUserId(uid);
+    // we use JSON.stringify({}) because to localStorage we can only
+    // entre text and we have to set object
+    localStorage.setItem(
+      "userData",
+      JSON.stringify({ userId: uid, token: token })
+    );
   }, []);
 
   const logout = useCallback(() => {
     setToken(null);
     setUserId(null);
+    localStorage.removeItem("userData");
   }, []);
+
+  
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("userData"));
+    if (storedData && storedData.token) {
+      login(storedData.uid, storedData.token);
+    }
+    // we can also add a state for representing the status of this localStorage check
+    // So, we can add loading screen at that time 
+  }, [login]);
 
   let routes;
 
